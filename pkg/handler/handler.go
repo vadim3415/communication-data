@@ -45,8 +45,9 @@ func getMMS(c *gin.Context) {
 			resultSlice = append(resultSlice, v)
 		}
 	}
-
 	fmt.Println(resultSlice)
 	c.JSON(http.StatusOK, resultSlice)
+	resultSlice = nil
+	mmsJsonSlice = nil
 	return
 }

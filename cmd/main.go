@@ -1,7 +1,10 @@
 package main
 
 import (
+	"Diplom/pkg/model"
+	"Diplom/pkg/processingData"
 	"context"
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,12 +17,16 @@ import (
 )
 
 func main() {
-	// логи в json формате
 	logrus.SetFormatter(new(logrus.JSONFormatter))
-	// конфиг
+
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
+
+	var result []model.SMSData
+
+	result = processingData.ResultSMS()
+	fmt.Println("\n", result, "\n")
 
 	srv := new(web.Server)
 	go func() {

@@ -10,7 +10,7 @@ import (
 
 func ResultSMS() []model.SMSData {
 	//читаем файл
-	file, err := os.Open("simulator/skillbox-diploma/sms.data")
+	file, err := os.Open("sms.data")
 	if err != nil {
 		log.Fatal(err)
 		return nil

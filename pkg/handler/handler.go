@@ -18,21 +18,21 @@ func getMMS(c *gin.Context) {
 
 	resp, err := http.Get("http://127.0.0.1:8383/mms")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, resultSlice)
+		c.JSON(http.StatusBadRequest, mmsJsonSlice)
 		logrus.Println(err)
 		return
 	}
 
 	textBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, resultSlice)
+		c.JSON(http.StatusBadRequest, mmsJsonSlice)
 		logrus.Println(err)
 		return
 	}
 	defer resp.Body.Close()
 
 	if err := json.Unmarshal(textBytes, &mmsJsonSlice); err != nil {
-		c.JSON(http.StatusBadRequest, resultSlice)
+		c.JSON(http.StatusBadRequest, mmsJsonSlice)
 		logrus.Println(err)
 		return
 	}

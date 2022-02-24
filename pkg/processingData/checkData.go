@@ -1,5 +1,10 @@
 package processingData
 
+import (
+	"github.com/sirupsen/logrus"
+	"strconv"
+)
+
 func CheckCountryFunc(country string) string {
 	output := ""
 	mmsCountryMap := map[string]string{
@@ -30,9 +35,12 @@ func CheckCountryFunc(country string) string {
 func CheckProviderFunc(provider string) string {
 	output := ""
 	mmsProviderMap := map[string]string{
-		"Topolo": "Topolo",
-		"Rond":   "Rond",
-		"Kildy":  "Kildy",
+		"Topolo":           "Topolo",
+		"Rond":             "Rond",
+		"Kildy":            "Kildy",
+		"TransparentCalls": "TransparentCalls",
+		"E-Voice":          "E-Voice",
+		"JustPhone":        "JustPhone",
 	}
 	for _, v := range mmsProviderMap {
 		if provider == v {
@@ -40,4 +48,20 @@ func CheckProviderFunc(provider string) string {
 		}
 	}
 	return output
+}
+
+func convertingFloat32(s string) float32 {
+	f, err := strconv.ParseFloat("3.1415", 32)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	return float32(f)
+}
+
+func convertingInt(s string) int {
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	return i
 }

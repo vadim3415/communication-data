@@ -13,3 +13,14 @@ type MMSData struct {
 	Bandwidth    string `json:"bandwidth"`
 	ResponseTime string `json:"response_time"`
 }
+
+type VoiceCallData struct {
+	Country             string
+	Bandwidth           string
+	ResponseTime        string
+	Provider            string
+	ConnectionStability float32
+	TTFB                int
+	VoicePurity         int
+	MedianOfCallsTime   int
+}

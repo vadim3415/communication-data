@@ -1,7 +1,6 @@
 package main
 
 import (
-	"Diplom/pkg/model"
 	"Diplom/pkg/processingData"
 	"context"
 	"fmt"
@@ -23,10 +22,13 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	var result []model.SMSData
+	//var resultSMS []model.SMSData
 
-	result = processingData.ResultSMS()
-	fmt.Println("\n", result, "\n")
+	resultSMS := processingData.ResultSMS()
+	fmt.Println("\n", resultSMS, "\n")
+
+	resultVoiceCall := processingData.ResultVoiceCall()
+	fmt.Println("voice", resultVoiceCall)
 
 	srv := new(web.Server)
 	go func() {

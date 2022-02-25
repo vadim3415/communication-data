@@ -2,7 +2,7 @@ package processingData
 
 import (
 	"Diplom/pkg/model"
-	"fmt"
+
 	"io/ioutil"
 	"log"
 	"os"
@@ -23,7 +23,6 @@ func ResultVoiceCall() []model.VoiceCallData {
 	}
 
 	line := strings.Split(string(readFile), "\n")
-	fmt.Println("1111", line[0])
 	var VoiceCall model.VoiceCallData
 	var sliceVoiceCall []model.VoiceCallData
 

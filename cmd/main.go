@@ -22,13 +22,14 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	//var resultSMS []model.SMSData
-
 	resultSMS := processingData.ResultSMS()
-	fmt.Println("\n", resultSMS, "\n")
+	fmt.Println("\n SMS", resultSMS, "\n")
 
 	resultVoiceCall := processingData.ResultVoiceCall()
-	fmt.Println("voice", resultVoiceCall)
+	fmt.Println("\n VOICE", resultVoiceCall, "\n")
+
+	resultEmail := processingData.ResultEmail()
+	fmt.Println("\n Email", resultEmail, "\n")
 
 	srv := new(web.Server)
 	go func() {

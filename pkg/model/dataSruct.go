@@ -24,3 +24,8 @@ type VoiceCallData struct {
 	VoicePurity         int
 	MedianOfCallsTime   int
 }
+type EmailData struct {
+	Country      string
+	Provider     string
+	DeliveryTime int
+}

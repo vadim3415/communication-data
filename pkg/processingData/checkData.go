@@ -80,3 +80,11 @@ func convertingInt(s string) int {
 	}
 	return i
 }
+
+func convertingBool(s string) bool {
+	b, err := strconv.ParseBool(s)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	return b
+}

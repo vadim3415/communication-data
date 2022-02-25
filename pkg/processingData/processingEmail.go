@@ -22,7 +22,7 @@ func ResultEmail() []model.EmailData {
 	}
 
 	line := strings.Split(string(readFile), "\n")
-	var VoiceCall model.EmailData
+	var Email model.EmailData
 	var sliceEmail []model.EmailData
 
 	for i := 0; i < len(line); i++ {
@@ -32,7 +32,7 @@ func ResultEmail() []model.EmailData {
 		if checkLine == 2 {
 			splitLine := strings.Split(line[i], ";")
 
-			VoiceCall = model.EmailData{
+			Email = model.EmailData{
 				Country:      splitLine[0],
 				Provider:     splitLine[1],
 				DeliveryTime: convertingInt(splitLine[2]),
@@ -41,7 +41,7 @@ func ResultEmail() []model.EmailData {
 			checkProvider := CheckProviderFunc(splitLine[1])
 
 			if splitLine[0] == checkCountry && splitLine[1] == checkProvider {
-				sliceEmail = append(sliceEmail, VoiceCall)
+				sliceEmail = append(sliceEmail, Email)
 			}
 
 		}

@@ -24,8 +24,18 @@ type VoiceCallData struct {
 	VoicePurity         int
 	MedianOfCallsTime   int
 }
+
 type EmailData struct {
 	Country      string
 	Provider     string
 	DeliveryTime int
+}
+
+type BillingData struct {
+	CreateCustomer bool
+	Purchase       bool
+	Payout         bool
+	Recurring      bool
+	FraudControl   bool
+	CheckoutPage   bool
 }

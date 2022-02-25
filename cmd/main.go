@@ -31,6 +31,9 @@ func main() {
 	resultEmail := processingData.ResultEmail()
 	fmt.Println("\n Email", resultEmail, "\n")
 
+	resultBilling := processingData.ResultBilling()
+	fmt.Println("\n Billing", resultBilling, "\n")
+
 	srv := new(web.Server)
 	go func() {
 		if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {

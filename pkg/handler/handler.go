@@ -53,7 +53,7 @@ func getMMS(c *gin.Context) {
 		JsonSliceMMS = nil
 		return
 	}
-	c.JSON(http.StatusOK, nilSliceMMS)
+	c.JSON(http.StatusInternalServerError, nilSliceMMS)
 }
 
 func getSupport(c *gin.Context) {
@@ -94,5 +94,46 @@ func getSupport(c *gin.Context) {
 		JsonSliceSupport = nil
 		return
 	}
-	c.JSON(http.StatusOK, nilSliceSupport)
+	c.JSON(http.StatusInternalServerError, nilSliceSupport)
+}
+
+func getIncident(c *gin.Context) {
+	var JsonSliceIncident []model.IncidentData
+	var resultSliceIncident []model.IncidentData
+	var nilSliceIncident []model.IncidentData
+
+	statusCode := c.Writer.Status()
+	if statusCode == 200 {
+		resp, err := http.Get("http://127.0.0.1:8383/accendent")
+		if err != nil {
+			c.JSON(http.StatusBadRequest, nilSliceIncident)
+			logrus.Println(err)
+			return
+		}
+
+		textBytes, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, nilSliceIncident)
+			logrus.Println(err)
+			return
+		}
+		defer resp.Body.Close()
+
+		if err := json.Unmarshal(textBytes, &JsonSliceIncident); err != nil {
+			c.JSON(http.StatusBadRequest, JsonSliceIncident)
+			logrus.Println(err)
+			return
+		}
+
+		for _, v := range JsonSliceIncident {
+			resultSliceIncident = append(resultSliceIncident, v)
+		}
+
+		fmt.Println(resultSliceIncident)
+		c.JSON(http.StatusOK, resultSliceIncident)
+		resultSliceIncident = nil
+		JsonSliceIncident = nil
+		return
+	}
+	c.JSON(http.StatusInternalServerError, nilSliceIncident)
 }

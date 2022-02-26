@@ -11,6 +11,7 @@ func InitRoutes() *gin.Engine {
 	{
 		AllGroup.GET("/mms", getMMS)
 		AllGroup.GET("/support", getSupport)
+		AllGroup.GET("/incident", getIncident)
 	}
 	return router
 }

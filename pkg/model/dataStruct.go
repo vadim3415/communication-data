@@ -44,3 +44,8 @@ type SupportData struct {
 	Topic         string `json:"topic"`
 	ActiveTickets int    `json:"active_tickets"`
 }
+
+type IncidentData struct {
+	Topic  string `json:"topic"`
+	Status string `json:"status"`
+}

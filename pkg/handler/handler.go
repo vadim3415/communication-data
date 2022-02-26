@@ -11,47 +11,88 @@ import (
 	"net/http"
 )
 
-var mmsJsonSlice []model.MMSData
-var resultSlice []model.MMSData
-var nilSlice []model.MMSData
-
 func getMMS(c *gin.Context) {
+	var JsonSliceMMS []model.MMSData
+	var resultSliceMMS []model.MMSData
+	var nilSliceMMS []model.MMSData
+
 	statusCode := c.Writer.Status()
 	if statusCode == 200 {
 		resp, err := http.Get("http://127.0.0.1:8383/mms")
 		if err != nil {
-			c.JSON(http.StatusBadRequest, nilSlice)
+			c.JSON(http.StatusBadRequest, nilSliceMMS)
 			logrus.Println(err)
 			return
 		}
 
 		textBytes, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, nilSlice)
+			c.JSON(http.StatusBadRequest, nilSliceMMS)
 			logrus.Println(err)
 			return
 		}
 		defer resp.Body.Close()
 
-		if err := json.Unmarshal(textBytes, &mmsJsonSlice); err != nil {
-			c.JSON(http.StatusBadRequest, mmsJsonSlice)
+		if err := json.Unmarshal(textBytes, &JsonSliceMMS); err != nil {
+			c.JSON(http.StatusBadRequest, JsonSliceMMS)
 			logrus.Println(err)
 			return
 		}
 
-		for _, v := range mmsJsonSlice {
+		for _, v := range JsonSliceMMS {
 			checkCountry := processingData.CheckCountryFunc(v.Country)
 			checkProvider := processingData.CheckProviderFunc(v.Provider)
 
 			if len(checkCountry) > 0 && len(checkProvider) > 0 {
-				resultSlice = append(resultSlice, v)
+				resultSliceMMS = append(resultSliceMMS, v)
 			}
 		}
-		fmt.Println(resultSlice)
-		c.JSON(http.StatusOK, resultSlice)
-		resultSlice = nil
-		mmsJsonSlice = nil
+		fmt.Println(resultSliceMMS)
+		c.JSON(http.StatusOK, resultSliceMMS)
+		resultSliceMMS = nil
+		JsonSliceMMS = nil
 		return
 	}
-	c.JSON(http.StatusOK, nilSlice)
+	c.JSON(http.StatusOK, nilSliceMMS)
+}
+
+func getSupport(c *gin.Context) {
+	var JsonSliceSupport []model.SupportData
+	var resultSliceSupport []model.SupportData
+	var nilSliceSupport []model.SupportData
+
+	statusCode := c.Writer.Status()
+	if statusCode == 200 {
+		resp, err := http.Get("http://127.0.0.1:8383/support")
+		if err != nil {
+			c.JSON(http.StatusBadRequest, nilSliceSupport)
+			logrus.Println(err)
+			return
+		}
+
+		textBytes, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, nilSliceSupport)
+			logrus.Println(err)
+			return
+		}
+		defer resp.Body.Close()
+
+		if err := json.Unmarshal(textBytes, &JsonSliceSupport); err != nil {
+			c.JSON(http.StatusBadRequest, JsonSliceSupport)
+			logrus.Println(err)
+			return
+		}
+
+		for _, v := range JsonSliceSupport {
+			resultSliceSupport = append(resultSliceSupport, v)
+		}
+
+		fmt.Println(resultSliceSupport)
+		c.JSON(http.StatusOK, resultSliceSupport)
+		resultSliceSupport = nil
+		JsonSliceSupport = nil
+		return
+	}
+	c.JSON(http.StatusOK, nilSliceSupport)
 }

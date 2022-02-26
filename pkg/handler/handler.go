@@ -11,6 +11,11 @@ import (
 	"net/http"
 )
 
+func get(c *gin.Context) {
+	ok := "ok"
+	c.JSON(http.StatusOK, ok)
+}
+
 func getMMS(c *gin.Context) {
 	var JsonSliceMMS []model.MMSData
 	var resultSliceMMS []model.MMSData

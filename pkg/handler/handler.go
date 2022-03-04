@@ -54,8 +54,8 @@ func getMMS(c *gin.Context) {
 		}
 		fmt.Println(resultSliceMMS)
 		c.JSON(http.StatusOK, resultSliceMMS)
-		resultSliceMMS = nil
-		JsonSliceMMS = nil
+		//resultSliceMMS = nil
+		//JsonSliceMMS = nil
 		return
 	}
 	c.JSON(http.StatusInternalServerError, nilSliceMMS)
@@ -95,8 +95,8 @@ func getSupport(c *gin.Context) {
 
 		fmt.Println(resultSliceSupport)
 		c.JSON(http.StatusOK, resultSliceSupport)
-		resultSliceSupport = nil
-		JsonSliceSupport = nil
+		//resultSliceSupport = nil
+		//JsonSliceSupport = nil
 		return
 	}
 	c.JSON(http.StatusInternalServerError, nilSliceSupport)
@@ -136,8 +136,8 @@ func getIncident(c *gin.Context) {
 
 		fmt.Println(resultSliceIncident)
 		c.JSON(http.StatusOK, resultSliceIncident)
-		resultSliceIncident = nil
-		JsonSliceIncident = nil
+		//resultSliceIncident = nil
+		//JsonSliceIncident = nil
 		return
 	}
 	c.JSON(http.StatusInternalServerError, nilSliceIncident)

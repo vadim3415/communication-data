@@ -34,6 +34,8 @@ func main() {
 	resultBilling := processingData.ResultBilling()
 	fmt.Println("\n Billing", resultBilling, "\n")
 
+	processingData.GetResultData()
+
 	srv := new(web.Server)
 	go func() {
 		if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {
@@ -47,7 +49,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
 
-	logrus.Print("HTTP31 Shutting Down")
+	logrus.Print("Diplom Shutting Down")
 
 	if err := srv.Shutdown(context.Background()); err != nil {
 		logrus.Errorf("error occured on server shutting down: %s", err.Error())

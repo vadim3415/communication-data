@@ -32,8 +32,6 @@ func CheckCountryFunc(country string) string {
 	return output
 }
 
-// Gmail, Yahoo, Hotmail, MSN, Orange, Comcast, AOL, Live, RediffMail, GMX, Protonmail,
-//Yandex, Mail.ru
 func CheckProviderFunc(provider string) string {
 	output := ""
 	mmsProviderMap := map[string]string{
@@ -59,6 +57,33 @@ func CheckProviderFunc(provider string) string {
 	}
 	for _, v := range mmsProviderMap {
 		if provider == v {
+			output = v
+		}
+	}
+	return output
+}
+
+func FullCountryFunc(country string) string {
+	output := ""
+	mmsCountryMap := map[string]string{
+		"RU": "Russian Federation",
+		"US": "United States of America",
+		"GB": "United Kingdom of Great Britain and Northern Ireland",
+		"FR": "France",
+		"BL": "Saint Barthélemy",
+		"AT": "Austria",
+		"BG": "Bulgaria",
+		"DK": "Denmark",
+		"CA": "Canada",
+		"ES": "Spain",
+		"CH": "Switzerland",
+		"TR": "Turkey",
+		"PE": "Peru",
+		"NZ": "New Zealand",
+		"MC": "Monaco",
+	}
+	for i, v := range mmsCountryMap {
+		if country == i {
 			output = v
 		}
 	}

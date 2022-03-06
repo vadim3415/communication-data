@@ -10,7 +10,7 @@ func InitRoutes() *gin.Engine {
 	AllGroup := router.Group("/")
 	{
 		AllGroup.GET("/", get)
-		AllGroup.GET("/mms", getMMS)
+		AllGroup.GET("/mms", GetMMS)
 		AllGroup.GET("/support", getSupport)
 		AllGroup.GET("/incident", getIncident)
 	}

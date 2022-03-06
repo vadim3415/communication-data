@@ -1,15 +1,15 @@
 package main
 
 import (
-	"Diplom/pkg/processingData"
+	"Diplom/internal/processingData"
+	web "Diplom/internal/server"
 	"context"
 	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 
-	web "Diplom"
-	"Diplom/pkg/handler"
+	"Diplom/internal/handler"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -22,8 +22,8 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	resultSMS := processingData.ResultSMS()
-	fmt.Println("\n SMS", resultSMS, "\n")
+	//resultSMS := processingData.ResultSMS()
+	//fmt.Println("\n SMS", resultSMS, "\n")
 
 	resultVoiceCall := processingData.ResultVoiceCall()
 	fmt.Println("\n VOICE", resultVoiceCall, "\n")

@@ -91,7 +91,7 @@ func FullCountryFunc(country string) string {
 }
 
 func convertingFloat32(s string) float32 {
-	f, err := strconv.ParseFloat("3.1415", 32)
+	f, err := strconv.ParseFloat(s, 32)
 	if err != nil {
 		logrus.Fatal(err)
 	}

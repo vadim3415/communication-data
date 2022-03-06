@@ -1,7 +1,7 @@
 package processingData
 
 import (
-	"Diplom/pkg/model"
+	"Diplom/internal/model"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"log"

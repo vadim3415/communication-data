@@ -1,12 +1,11 @@
 package processingData
 
 import (
-	"Diplom/pkg/model"
-	"fmt"
+	"Diplom/internal/model"
 	"sort"
 )
 
-func GetResultData() {
+func SortSMS() [][]model.SMSData {
 	smsData := ResultSMS()
 
 	var fullCountrySlice []model.SMSData
@@ -19,10 +18,10 @@ func GetResultData() {
 	sort.Slice(smsData, func(i, j int) bool { return smsData[i].Provider < smsData[j].Provider })
 	sort.Slice(fullCountrySlice, func(i, j int) bool { return fullCountrySlice[i].Country < fullCountrySlice[j].Country })
 
-	var a model.ResultSetT
+	var smsSlice model.ResultSetT
 
-	a.SMS = append(a.SMS, smsData)
-	a.SMS = append(a.SMS, fullCountrySlice)
-	fmt.Println("aaa", a)
+	smsSlice.SMS = append(smsSlice.SMS, smsData)
+	smsSlice.SMS = append(smsSlice.SMS, fullCountrySlice)
 
+	return smsSlice.SMS
 }

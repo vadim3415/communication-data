@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"Diplom/pkg/model"
-	"Diplom/pkg/processingData"
+	"Diplom/internal/model"
+	"Diplom/internal/processingData"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -16,7 +16,7 @@ func get(c *gin.Context) {
 	c.JSON(http.StatusOK, ok)
 }
 
-func getMMS(c *gin.Context) {
+func GetMMS(c *gin.Context) {
 	var JsonSliceMMS []model.MMSData
 	var resultSliceMMS []model.MMSData
 	var nilSliceMMS []model.MMSData

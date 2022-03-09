@@ -2,6 +2,7 @@ package processingData
 
 import (
 	"Diplom/internal/model"
+	"encoding/json"
 	"fmt"
 )
 
@@ -11,6 +12,12 @@ func GetResultData() {
 
 	smsData := SortSMS()
 	sortResult.SMS = append(sortResult.SMS, smsData...)
-	fmt.Println()
+	fmt.Println("SMS", sortResult.SMS)
+
+	sortResult.VoiceCall = ResultVoiceCall()
+	fmt.Println(sortResult)
+
+	a, _ := json.Marshal(sortResult)
+	fmt.Println("Json", string(a))
 
 }

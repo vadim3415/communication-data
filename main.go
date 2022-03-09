@@ -34,6 +34,15 @@ func main() {
 	resultBilling := processingData.ResultBilling()
 	fmt.Println("\n Billing", resultBilling, "\n")
 
+	resultMMS := processingData.GetMMS()
+	fmt.Println("\n MMS", resultMMS, "\n")
+
+	resultSupport := processingData.GetSupport()
+	fmt.Println("\n Support", resultSupport, "\n")
+
+	resultIncident := processingData.GetIncident()
+	fmt.Println("\n Incident", resultIncident, "\n")
+
 	processingData.GetResultData()
 
 	srv := new(web.Server)

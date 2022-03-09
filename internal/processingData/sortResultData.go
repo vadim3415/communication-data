@@ -6,22 +6,24 @@ import (
 )
 
 func SortSMS() [][]model.SMSData {
-	smsData := ResultSMS()
 
-	var fullCountrySlice []model.SMSData
+	var smsSlice [][]model.SMSData
+	var sortCountry []model.SMSData
+	var sortProvider []model.SMSData
+
+	smsData := ResultSMS()
 
 	for _, v := range smsData {
 		v.Country = FullCountryFunc(v.Country)
-		fullCountrySlice = append(fullCountrySlice, v)
+		sortCountry = append(sortCountry, v)
+		sortProvider = append(sortProvider, v)
 	}
 
-	sort.Slice(smsData, func(i, j int) bool { return smsData[i].Provider < smsData[j].Provider })
-	sort.Slice(fullCountrySlice, func(i, j int) bool { return fullCountrySlice[i].Country < fullCountrySlice[j].Country })
+	sort.Slice(sortProvider, func(i, j int) bool { return sortProvider[i].Provider < sortProvider[j].Provider })
+	smsSlice = append(smsSlice, sortProvider)
 
-	var smsSlice model.ResultSetT
+	sort.Slice(sortCountry, func(i, j int) bool { return sortCountry[i].Country < sortCountry[j].Country })
+	smsSlice = append(smsSlice, sortCountry)
 
-	smsSlice.SMS = append(smsSlice.SMS, smsData)
-	smsSlice.SMS = append(smsSlice.SMS, fullCountrySlice)
-
-	return smsSlice.SMS
+	return smsSlice
 }

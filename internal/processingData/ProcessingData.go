@@ -2,11 +2,14 @@ package processingData
 
 import (
 	"Diplom/internal/model"
-	"github.com/sirupsen/logrus"
+	"encoding/json"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 func ResultSMS() []model.SMSData {
@@ -52,6 +55,41 @@ func ResultSMS() []model.SMSData {
 		}
 	}
 	return sliceSMS
+}
+
+func GetMMS() []model.MMSData {
+	var JsonSliceMMS []model.MMSData
+	var resultSliceMMS []model.MMSData
+	var nilSliceMMS []model.MMSData
+
+	resp, err := http.Get("http://127.0.0.1:8383/mms")
+	if err != nil || resp.StatusCode != 200 {
+		logrus.Println("ошибка", err)
+		return nilSliceMMS
+	}
+
+	textBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logrus.Println(err)
+		return nilSliceMMS
+	}
+	defer resp.Body.Close()
+
+	if err := json.Unmarshal(textBytes, &JsonSliceMMS); err != nil {
+		logrus.Println(err, nilSliceMMS)
+		return nilSliceMMS
+	}
+
+	for _, v := range JsonSliceMMS {
+		checkCountry := CheckCountryFunc(v.Country)
+		checkProvider := CheckProviderFunc(v.Provider)
+
+		if len(checkCountry) > 0 && len(checkProvider) > 0 {
+			resultSliceMMS = append(resultSliceMMS, v)
+		}
+	}
+
+	return resultSliceMMS
 }
 
 func ResultVoiceCall() []model.VoiceCallData {
@@ -177,4 +215,55 @@ func ResultBilling() []model.BillingData {
 
 	}
 	return sliceBilling
+}
+
+func GetSupport() []model.SupportData {
+
+	var resultSliceSupport []model.SupportData
+	var nilSliceSupport []model.SupportData
+
+	resp, err := http.Get("http://127.0.0.1:8383/support")
+	if err != nil || resp.StatusCode != 200 {
+		logrus.Println(err)
+		return nilSliceSupport
+	}
+
+	textBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logrus.Println(err)
+		return nilSliceSupport
+	}
+	defer resp.Body.Close()
+
+	if err := json.Unmarshal(textBytes, &resultSliceSupport); err != nil {
+		logrus.Println(err)
+		return nilSliceSupport
+	}
+
+	return resultSliceSupport
+}
+
+func GetIncident() []model.IncidentData {
+	var resultSliceIncident []model.IncidentData
+	var nilSliceIncident []model.IncidentData
+
+	resp, err := http.Get("http://127.0.0.1:8383/accendent")
+	if err != nil {
+		logrus.Println(err)
+		return nilSliceIncident
+	}
+
+	textBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logrus.Println(err)
+		return nilSliceIncident
+	}
+	defer resp.Body.Close()
+
+	if err := json.Unmarshal(textBytes, &resultSliceIncident); err != nil {
+		logrus.Println(err)
+		return nilSliceIncident
+	}
+
+	return resultSliceIncident
 }

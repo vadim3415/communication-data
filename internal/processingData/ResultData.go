@@ -12,12 +12,25 @@ func GetResultData() {
 
 	smsData := SortSMS()
 	sortResult.SMS = append(sortResult.SMS, smsData...)
-	fmt.Println("SMS", sortResult.SMS)
+	fmt.Println("\n SMS \n", sortResult.SMS)
+
+	mmsData := SortMMS()
+	sortResult.MMS = append(sortResult.MMS, mmsData...)
+	fmt.Println("\n MMS \n", sortResult.MMS)
 
 	sortResult.VoiceCall = ResultVoiceCall()
-	fmt.Println(sortResult)
+	fmt.Println("\n voiceCell \n", sortResult.VoiceCall)
 
-	a, _ := json.Marshal(sortResult)
-	fmt.Println("Json", string(a))
+	sortResult.Billing = ResultBilling()
+	fmt.Println("\n Billing \n", sortResult.Billing)
+
+	sortResult.Incidents = SortIncident()
+	fmt.Println("\n Incident \n", sortResult.Incidents)
+
+	sortResult.Email = SortEmail()
+	fmt.Println("\n Email \n", sortResult.Email)
+
+	v, _ := json.Marshal(sortResult)
+	fmt.Println("\nJson\n", string(v))
 
 }

@@ -179,23 +179,24 @@ func ResultEmail() []model.EmailData {
 	return sliceEmail
 }
 
-func ResultBilling() []model.BillingData {
+func ResultBilling() model.BillingData {
 	file, err := os.Open("billing.data")
 	if err != nil {
 		log.Fatal(err)
-		return nil
+		return model.BillingData{}
 	}
 	defer file.Close()
 
 	readFile, err := ioutil.ReadAll(file)
 	if err != nil {
 		logrus.Fatal(err)
+		return model.BillingData{}
 	}
 
 	line := strings.Split(string(readFile), "\n")
 
 	var Billing model.BillingData
-	var sliceBilling []model.BillingData
+	//var sliceBilling []model.BillingData
 
 	for i := 0; i < len(line); i++ {
 
@@ -211,10 +212,10 @@ func ResultBilling() []model.BillingData {
 			CheckoutPage:   convertingBool(splitLine[lenSplitLine-6]),
 		}
 
-		sliceBilling = append(sliceBilling, Billing)
+		//sliceBilling = append(sliceBilling, Billing)
 
 	}
-	return sliceBilling
+	return Billing
 }
 
 func GetSupport() []model.SupportData {

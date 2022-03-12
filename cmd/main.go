@@ -4,7 +4,6 @@ import (
 	"Diplom/internal/processingData"
 	web "Diplom/internal/server"
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -25,23 +24,23 @@ func main() {
 	//resultSMS := processingData.ResultSMS()
 	//fmt.Println("\n SMS", resultSMS, "\n")
 
-	resultVoiceCall := processingData.ResultVoiceCall()
-	fmt.Println("\n VOICE", resultVoiceCall, "\n")
+	//resultVoiceCall := processingData.ResultVoiceCall()
+	//fmt.Println("\n VOICE", resultVoiceCall, "\n")
 
-	resultEmail := processingData.ResultEmail()
-	fmt.Println("\n Email", resultEmail, "\n")
+	//resultEmail := processingData.ResultEmail()
+	//fmt.Println("\n Email", resultEmail, "\n")
 
-	resultBilling := processingData.ResultBilling()
-	fmt.Println("\n Billing", resultBilling, "\n")
+	//resultBilling := processingData.ResultBilling()
+	//fmt.Println("\n Billing", resultBilling, "\n")
 
-	resultMMS := processingData.GetMMS()
-	fmt.Println("\n MMS", resultMMS, "\n")
+	//resultMMS := processingData.GetMMS()
+	//fmt.Println("\n MMS", resultMMS, "\n")
 
-	resultSupport := processingData.GetSupport()
-	fmt.Println("\n Support", resultSupport, "\n")
+	//resultSupport := processingData.GetSupport()
+	//fmt.Println("\n Support", resultSupport, "\n")
 
-	resultIncident := processingData.GetIncident()
-	fmt.Println("\n Incident", resultIncident, "\n")
+	//resultIncident := processingData.GetIncident()
+	//fmt.Println("\n Incident", resultIncident, "\n")
 
 	processingData.GetResultData()
 

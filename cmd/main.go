@@ -1,7 +1,6 @@
 package main
 
 import (
-	"Diplom/internal/processingData"
 	web "Diplom/internal/server"
 	"context"
 	"os"
@@ -42,7 +41,7 @@ func main() {
 	//resultIncident := processingData.GetIncident()
 	//fmt.Println("\n Incident", resultIncident, "\n")
 
-	processingData.GetResultData()
+	//processingData.GetResultData()
 
 	srv := new(web.Server)
 	go func() {

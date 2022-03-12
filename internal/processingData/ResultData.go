@@ -2,13 +2,11 @@ package processingData
 
 import (
 	"Diplom/internal/model"
-	"encoding/json"
-	"fmt"
 )
 
 var sortResult model.ResultSetT
 
-func GetResultData() {
+func GetResultData() model.ResultSetT {
 
 	sortResult.SMS = SortSMS()
 	//fmt.Println("\n SMS \n", sortResult.SMS)
@@ -31,7 +29,8 @@ func GetResultData() {
 	sortResult.Incidents = SortIncident()
 	//fmt.Println("\n Incident \n", sortResult.Incidents)
 
-	v, _ := json.Marshal(sortResult)
-	fmt.Println("\nJson\n", string(v))
+	//v, _ := json.Marshal(sortResult)
+	//fmt.Println("\nJson\n", string(v))
+	return sortResult
 
 }

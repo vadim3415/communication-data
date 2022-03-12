@@ -91,6 +91,34 @@ func SortEmail() map[string][][]model.EmailData {
 	return emailMap
 }
 
+func SortSupport() []int {
+
+	SupportData := GetSupport()
+
+	timeOneTickets := 3
+	var tickets int
+	var load int
+	var averageResponseTime int
+	var supportSlice []int
+
+	for _, v := range SupportData {
+		tickets += v.ActiveTickets
+	}
+	averageResponseTime = tickets * timeOneTickets
+	switch {
+	case tickets < 9:
+		load = 1
+	case tickets >= 9 && tickets < 17:
+		load = 2
+	case tickets > 16:
+		load = 3
+	}
+	supportSlice = append(supportSlice, load)
+	supportSlice = append(supportSlice, averageResponseTime)
+
+	return supportSlice
+}
+
 func SortIncident() []model.IncidentData {
 
 	incidentData := GetIncident()

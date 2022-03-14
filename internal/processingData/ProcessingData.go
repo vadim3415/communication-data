@@ -4,7 +4,6 @@ import (
 	"Diplom/internal/model"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -12,45 +11,50 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func ResultSMS() []model.SMSData {
-	//читаем файл
-	file, err := os.Open("sms.data")
+const smsFileName = "sms.data"
+const voiceFilename = "voice.data"
+const emailFilename = "email.data"
+const billingFilename = "billing.data"
+
+func openReedFile(fileName string) []byte {
+	file, err := os.Open(fileName)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Println(err)
 		return nil
 	}
 	defer file.Close()
-	//открываем файл
+
 	readFile, err := ioutil.ReadAll(file)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Println(err)
 	}
-	// делим содержимое на строки
+	return readFile
+}
+
+func ResultSMS() []model.SMSData {
+	readFile := openReedFile(smsFileName)
 	line := strings.Split(string(readFile), "\n")
 
-	var callSMS model.SMSData
+	var smsData model.SMSData
 	var sliceSMS []model.SMSData
-	// цикл работает пока есть строки
+
 	for i := 0; i < len(line); i++ {
-		// считаем колличество разделителей
 		checkLine := strings.Count(line[i], ";")
-		// проверяем целостность строки
+
 		if checkLine == 3 {
 			splitLine := strings.Split(line[i], ";")
 
-			callSMS = model.SMSData{
+			smsData = model.SMSData{
 				Country:      splitLine[0],
 				Bandwidth:    splitLine[1],
 				ResponseTime: splitLine[2],
 				Provider:     splitLine[3],
 			}
-			// проверяем страну
 			checkCountry := CheckCountryFunc(splitLine[0])
-			//проверяем провайдера
 			checkProvider := CheckProviderFunc(splitLine[3])
-			// если страна и провайдер прошли проверку, записываем в срез
+
 			if splitLine[0] == checkCountry && splitLine[3] == checkProvider {
-				sliceSMS = append(sliceSMS, callSMS)
+				sliceSMS = append(sliceSMS, smsData)
 			}
 		}
 	}
@@ -64,10 +68,9 @@ func GetMMS() []model.MMSData {
 
 	resp, err := http.Get("http://127.0.0.1:8383/mms")
 	if err != nil || resp.StatusCode != 200 {
-		logrus.Println("ошибка", err)
+		logrus.Println(err)
 		return nilSliceMMS
 	}
-
 	textBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		logrus.Println(err)
@@ -79,7 +82,6 @@ func GetMMS() []model.MMSData {
 		logrus.Println(err, nilSliceMMS)
 		return nilSliceMMS
 	}
-
 	for _, v := range JsonSliceMMS {
 		checkCountry := CheckCountryFunc(v.Country)
 		checkProvider := CheckProviderFunc(v.Provider)
@@ -88,29 +90,17 @@ func GetMMS() []model.MMSData {
 			resultSliceMMS = append(resultSliceMMS, v)
 		}
 	}
-
 	return resultSliceMMS
 }
 
 func ResultVoiceCall() []model.VoiceCallData {
-	file, err := os.Open("voice.data")
-	if err != nil {
-		log.Fatal(err)
-		return nil
-	}
-	defer file.Close()
-
-	readFile, err := ioutil.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	readFile := openReedFile(voiceFilename)
 	line := strings.Split(string(readFile), "\n")
+
 	var VoiceCall model.VoiceCallData
 	var sliceVoiceCall []model.VoiceCallData
 
 	for i := 0; i < len(line); i++ {
-
 		checkLine := strings.Count(line[i], ";")
 
 		if checkLine == 7 {
@@ -132,31 +122,19 @@ func ResultVoiceCall() []model.VoiceCallData {
 			if splitLine[0] == checkCountry && splitLine[3] == checkProvider {
 				sliceVoiceCall = append(sliceVoiceCall, VoiceCall)
 			}
-
 		}
 	}
 	return sliceVoiceCall
 }
 
 func ResultEmail() []model.EmailData {
-	file, err := os.Open("email.data")
-	if err != nil {
-		log.Fatal(err)
-		return nil
-	}
-	defer file.Close()
-
-	readFile, err := ioutil.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	readFile := openReedFile(emailFilename)
 	line := strings.Split(string(readFile), "\n")
+
 	var Email model.EmailData
 	var sliceEmail []model.EmailData
 
 	for i := 0; i < len(line); i++ {
-
 		checkLine := strings.Count(line[i], ";")
 
 		if checkLine == 2 {
@@ -173,33 +151,18 @@ func ResultEmail() []model.EmailData {
 			if splitLine[0] == checkCountry && splitLine[1] == checkProvider {
 				sliceEmail = append(sliceEmail, Email)
 			}
-
 		}
 	}
 	return sliceEmail
 }
 
 func ResultBilling() model.BillingData {
-	file, err := os.Open("billing.data")
-	if err != nil {
-		log.Fatal(err)
-		return model.BillingData{}
-	}
-	defer file.Close()
-
-	readFile, err := ioutil.ReadAll(file)
-	if err != nil {
-		logrus.Fatal(err)
-		return model.BillingData{}
-	}
-
+	readFile := openReedFile(billingFilename)
 	line := strings.Split(string(readFile), "\n")
 
 	var Billing model.BillingData
-	//var sliceBilling []model.BillingData
 
 	for i := 0; i < len(line); i++ {
-
 		splitLine := strings.Split(line[i], "")
 		lenSplitLine := len(splitLine)
 
@@ -211,15 +174,11 @@ func ResultBilling() model.BillingData {
 			FraudControl:   convertingBool(splitLine[lenSplitLine-5]),
 			CheckoutPage:   convertingBool(splitLine[lenSplitLine-6]),
 		}
-
-		//sliceBilling = append(sliceBilling, Billing)
-
 	}
 	return Billing
 }
 
 func GetSupport() []model.SupportData {
-
 	var resultSliceSupport []model.SupportData
 	var nilSliceSupport []model.SupportData
 
@@ -265,6 +224,5 @@ func GetIncident() []model.IncidentData {
 		logrus.Println(err)
 		return nilSliceIncident
 	}
-
 	return resultSliceIncident
 }

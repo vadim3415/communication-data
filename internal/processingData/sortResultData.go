@@ -18,7 +18,6 @@ func SortSMS() [][]model.SMSData {
 		sortCountry = append(sortCountry, v)
 		sortProvider = append(sortProvider, v)
 	}
-
 	sort.Slice(sortProvider, func(i, j int) bool { return sortProvider[i].Provider < sortProvider[j].Provider })
 	smsSlice = append(smsSlice, sortProvider)
 
@@ -41,7 +40,6 @@ func SortMMS() [][]model.MMSData {
 		sortProvider = append(sortProvider, v)
 		sortCountry = append(sortCountry, v)
 	}
-
 	sort.Slice(sortProvider, func(i, j int) bool { return sortProvider[i].Provider < sortProvider[j].Provider })
 	mmsSlice = append(mmsSlice, sortProvider)
 
@@ -92,7 +90,6 @@ func SortEmail() map[string][][]model.EmailData {
 }
 
 func SortSupport() []int {
-
 	SupportData := GetSupport()
 
 	timeOneTickets := 3

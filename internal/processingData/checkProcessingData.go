@@ -93,7 +93,7 @@ func FullCountryFunc(country string) string {
 func convertingFloat32(s string) float32 {
 	f, err := strconv.ParseFloat(s, 32)
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Println(err)
 	}
 	return float32(f)
 }
@@ -101,7 +101,7 @@ func convertingFloat32(s string) float32 {
 func convertingInt(s string) int {
 	i, err := strconv.Atoi(s)
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Println(err)
 	}
 	return i
 }
@@ -109,7 +109,7 @@ func convertingInt(s string) int {
 func convertingBool(s string) bool {
 	b, err := strconv.ParseBool(s)
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Println(err)
 	}
 	return b
 }

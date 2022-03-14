@@ -20,29 +20,6 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	//resultSMS := processingData.ResultSMS()
-	//fmt.Println("\n SMS", resultSMS, "\n")
-
-	//resultVoiceCall := processingData.ResultVoiceCall()
-	//fmt.Println("\n VOICE", resultVoiceCall, "\n")
-
-	//resultEmail := processingData.ResultEmail()
-	//fmt.Println("\n Email", resultEmail, "\n")
-
-	//resultBilling := processingData.ResultBilling()
-	//fmt.Println("\n Billing", resultBilling, "\n")
-
-	//resultMMS := processingData.GetMMS()
-	//fmt.Println("\n MMS", resultMMS, "\n")
-
-	//resultSupport := processingData.GetSupport()
-	//fmt.Println("\n Support", resultSupport, "\n")
-
-	//resultIncident := processingData.GetIncident()
-	//fmt.Println("\n Incident", resultIncident, "\n")
-
-	//processingData.GetResultData()
-
 	srv := new(web.Server)
 	go func() {
 		if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {

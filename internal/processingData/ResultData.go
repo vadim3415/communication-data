@@ -29,8 +29,6 @@ func GetResultData() model.ResultSetT {
 	sortResult.Incidents = SortIncident()
 	//fmt.Println("\n Incident \n", sortResult.Incidents)
 
-	//v, _ := json.Marshal(sortResult)
-	//fmt.Println("\nJson\n", string(v))
 	return sortResult
 
 }

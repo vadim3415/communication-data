@@ -9,7 +9,7 @@ func InitRoutes() *gin.Engine {
 
 	AllGroup := router.Group("/")
 	{
-		AllGroup.GET("/", get)
+		AllGroup.GET("/get", get)
 	}
 	return router
 }

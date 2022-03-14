@@ -16,5 +16,8 @@ func get(c *gin.Context) {
 	result.Data = resultSet
 	result.Status = true
 
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Headers", "Content-Type")
+
 	c.JSON(http.StatusOK, result)
 }

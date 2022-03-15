@@ -7,7 +7,11 @@ import (
 	"net/http"
 )
 
-func get(c *gin.Context) {
+func statusPage(c *gin.Context) {
+	c.Redirect(http.StatusMovedPermanently, "http://localhost:9002/s/status_page.html")
+}
+
+func api(c *gin.Context) {
 
 	var result model.ResultT
 

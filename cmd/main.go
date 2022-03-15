@@ -1,7 +1,7 @@
 package main
 
 import (
-	web "Diplom/internal/server"
+	"Diplom/internal/server"
 	"context"
 	"os"
 	"os/signal"
@@ -19,14 +19,12 @@ func main() {
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
-
-	srv := new(web.Server)
+	srv := new(server.Server)
 	go func() {
 		if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {
 			logrus.Fatalf(err.Error())
 		}
 	}()
-
 	logrus.Print("Diplom Project Started")
 
 	quit := make(chan os.Signal, 1)

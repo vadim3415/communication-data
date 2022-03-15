@@ -5,6 +5,21 @@ import (
 	"sort"
 )
 
+var sortResult model.ResultSetT
+
+func GetResultData() model.ResultSetT {
+
+	sortResult.SMS = SortSMS()
+	sortResult.MMS = SortMMS()
+	sortResult.VoiceCall = ResultVoiceCall()
+	sortResult.Email = SortEmail()
+	sortResult.Billing = ResultBilling()
+	sortResult.Support = SortSupport()
+	sortResult.Incidents = SortIncident()
+
+	return sortResult
+}
+
 func SortSMS() [][]model.SMSData {
 
 	var smsSlice [][]model.SMSData

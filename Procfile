@@ -1,2 +1,2 @@
-web: bin/cmd
-web :bin/web
+web: ./bin/cmd
+web :./bin/web

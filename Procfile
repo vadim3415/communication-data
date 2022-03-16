@@ -1,2 +1,1 @@
 web: cmd
-web: web

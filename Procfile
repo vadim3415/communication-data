@@ -1,2 +1,1 @@
-web: cmd
-worker: web
+web: cmd, web

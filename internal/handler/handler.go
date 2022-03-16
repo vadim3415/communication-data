@@ -8,7 +8,7 @@ import (
 )
 
 func statusPage(c *gin.Context) {
-	c.Redirect(http.StatusMovedPermanently, "http://localhost:9002/web/status_page.html")
+	c.Redirect(http.StatusMovedPermanently, "http://localhost:9002/simulator/status_page.html")
 }
 
 func api(c *gin.Context) {

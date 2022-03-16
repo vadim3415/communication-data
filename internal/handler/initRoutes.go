@@ -7,7 +7,7 @@ import (
 func InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.Static("/web", "./web")
+	router.Static("/simulator", "./simulator")
 
 	AllGroup := router.Group("/")
 	{

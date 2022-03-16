@@ -435,9 +435,9 @@ func listenAndServeHTTP() {
 	router.HandleFunc("/mms", handleMMS)
 	router.HandleFunc("/support", handleSupport)
 	router.HandleFunc("/accendent", handleAccendent)
-	router.HandleFunc("/test", handleTest).Methods("GET", "OPTIONS")
+	router.HandleFunc("/", handleTest).Methods("GET", "OPTIONS")
 
-	http.ListenAndServe(":"+port1, router)
+	http.ListenAndServe("0.0.0.0:"+port1, router)
 }
 
 func handleMMS(w http.ResponseWriter, r *http.Request) {

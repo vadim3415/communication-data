@@ -3,7 +3,6 @@ package main
 import (
 	"Diplom/internal/server"
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -26,7 +25,7 @@ func main() {
 			logrus.Fatalf(err.Error())
 		}
 	}()
-	fmt.Printf("Diplom Project Started")
+	logrus.Print("Diplom Project Started")
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)

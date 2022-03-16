@@ -11,7 +11,7 @@ func InitRoutes() *gin.Engine {
 
 	AllGroup := router.Group("/")
 	{
-		AllGroup.GET("/", statusPage)
+		AllGroup.GET("/", api)
 		AllGroup.GET("/api", api)
 	}
 	return router

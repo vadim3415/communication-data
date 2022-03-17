@@ -436,7 +436,7 @@ func listenAndServeHTTP() {
 	router.HandleFunc("/accendent", handleAccendent)
 	router.HandleFunc("/test", handleTest).Methods("GET", "OPTIONS")
 
-	http.ListenAndServe("https://diplom1-app.herokuapp.com:5000", router)
+	http.ListenAndServe(":5000", router)
 }
 
 func handleMMS(w http.ResponseWriter, r *http.Request) {

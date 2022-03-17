@@ -6,10 +6,9 @@ import (
 	"Diplom/internal/model"
 )
 
-var sortResult model.ResultSetT
-
 func GetResultData() model.ResultSetT {
 
+	var sortResult model.ResultSetT
 	sortResult.SMS = SortSMS()
 	sortResult.MMS = SortMMS()
 	sortResult.VoiceCall = ResultVoiceCall()

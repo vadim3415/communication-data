@@ -24,7 +24,7 @@ func api(c *gin.Context) {
 
 	if len(resultSet.SMS) > 0 && len(resultSet.MMS) > 0 && len(resultSet.VoiceCall) > 0 && len(resultSet.Email) > 0 &&
 		len(resultSet.Support) > 0 && len(resultSet.Incidents) > 0 && billing.CheckoutPage == true ||
-		billing.CheckoutPage == false {
+		billing.CheckoutPage == false && len(resultSet.Incidents) > 1 {
 
 		result.Data = resultSet
 		result.Status = true

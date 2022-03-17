@@ -67,7 +67,7 @@ func GetMMS() []model.MMSData {
 	var resultSliceMMS []model.MMSData
 	var nilSliceMMS []model.MMSData
 
-	resp, err := http.Get("http://localhost:8383/mms")
+	resp, err := http.Get(":5000/mms")
 	if err != nil || resp.StatusCode != 200 {
 		logrus.Println(err)
 		return nilSliceMMS
@@ -183,7 +183,7 @@ func GetSupport() []model.SupportData {
 	var resultSliceSupport []model.SupportData
 	var nilSliceSupport []model.SupportData
 
-	resp, err := http.Get("http://localhost:8383/support")
+	resp, err := http.Get(":5000/support")
 	if err != nil || resp.StatusCode != 200 {
 		logrus.Println(err)
 		return nilSliceSupport
@@ -208,7 +208,7 @@ func GetIncident() []model.IncidentData {
 	var resultSliceIncident []model.IncidentData
 	var nilSliceIncident []model.IncidentData
 
-	resp, err := http.Get("http://localhost:8383/accendent")
+	resp, err := http.Get(":5000/accendent")
 	if err != nil {
 		logrus.Println(err)
 		return nilSliceIncident

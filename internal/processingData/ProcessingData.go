@@ -67,7 +67,7 @@ func GetMMS() []model.MMSData {
 	var resultSliceMMS []model.MMSData
 	var nilSliceMMS []model.MMSData
 
-	resp, err := http.Get("http://127.0.0.1:5000/mms")
+	resp, err := http.Get("https://diplom1-app.herokuapp.com:5000/mms")
 	if err != nil || resp.StatusCode != 200 {
 		logrus.Println(err)
 		return nilSliceMMS

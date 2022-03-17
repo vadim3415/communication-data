@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -11,9 +12,9 @@ type Server struct {
 }
 
 func (s *Server) Run(port string, handler http.Handler) error {
-	//port1 := os.Getenv("PORT")
+	port1 := os.Getenv("PORT")
 	s.httpServer = &http.Server{
-		Addr:           ":" + port,
+		Addr:           ":" + port1,
 		Handler:        handler,
 		MaxHeaderBytes: 1 << 20, // 1 MB
 		ReadTimeout:    10 * time.Second,

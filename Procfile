@@ -1,2 +1,2 @@
 web: cmd
-web1: web
+web1: data_simulator

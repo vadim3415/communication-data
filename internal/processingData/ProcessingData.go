@@ -1,12 +1,13 @@
 package processingData
 
 import (
-	"Diplom/internal/model"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
+
+	"Diplom/internal/model"
 
 	"github.com/sirupsen/logrus"
 )

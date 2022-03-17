@@ -1,13 +1,13 @@
 package main
 
 import (
-	"Diplom/internal/server"
 	"context"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"Diplom/internal/handler"
+	"Diplom/internal/server"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"

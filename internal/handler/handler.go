@@ -1,14 +1,18 @@
 package handler
 
 import (
+	"net/http"
+
 	"Diplom/internal/model"
 	"Diplom/internal/processingData"
+
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func statusPage(c *gin.Context) {
-	c.Redirect(http.StatusMovedPermanently, "http://localhost:9002/simulator/status_page.html")
+	c.Redirect(http.StatusMovedPermanently, "./data/status_page.html")
+
+	return
 }
 
 func api(c *gin.Context) {

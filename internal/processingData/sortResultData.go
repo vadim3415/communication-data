@@ -1,8 +1,9 @@
 package processingData
 
 import (
-	"Diplom/internal/model"
 	"sort"
+
+	"Diplom/internal/model"
 )
 
 var sortResult model.ResultSetT

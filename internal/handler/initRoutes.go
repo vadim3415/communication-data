@@ -7,11 +7,11 @@ import (
 func InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.Static("/simulator", "./simulator")
+	router.Static("/data", "./static")
 
 	AllGroup := router.Group("/")
 	{
-		AllGroup.GET("/", api)
+		AllGroup.GET("/", statusPage)
 		AllGroup.GET("/api", api)
 	}
 	return router

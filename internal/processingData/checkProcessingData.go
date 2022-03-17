@@ -1,8 +1,9 @@
 package processingData
 
 import (
-	"github.com/sirupsen/logrus"
 	"strconv"
+
+	"github.com/sirupsen/logrus"
 )
 
 func CheckCountryFunc(country string) string {

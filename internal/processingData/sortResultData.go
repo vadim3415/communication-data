@@ -12,7 +12,7 @@ func GetResultData() model.ResultSetT {
 	sortResult.SMS = SortSMS()
 	sortResult.MMS = SortMMS()
 	sortResult.VoiceCall = ResultVoiceCall()
-	sortResult.Email = SortEmail()
+	sortResult.EmailSlice = SortEmail()
 	sortResult.Billing = ResultBilling()
 	sortResult.Support = SortSupport()
 	sortResult.Incidents = SortIncident()
@@ -64,7 +64,7 @@ func SortMMS() [][]model.MMSData {
 	return mmsSlice
 }
 
-func SortEmail() map[string][][]model.EmailData {
+func SortEmail() [][]model.EmailData {
 
 	var emailSlice [][]model.EmailData
 	var sortFast []model.EmailData
@@ -101,7 +101,8 @@ func SortEmail() map[string][][]model.EmailData {
 			emailSlice = nil
 		}
 	}
-	return emailMap
+	output := emailMap["RU"]
+	return output
 }
 
 func SortSupport() []int {

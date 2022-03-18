@@ -1,5 +1,5 @@
 (function(){
-    let apiPath = 'http://localhost:9000/api';
+    let apiPath = 'https://diplom1-app.herokuapp.com/api';
     //let apiPath = 'response/error.json';
 
     let dataScheme = {

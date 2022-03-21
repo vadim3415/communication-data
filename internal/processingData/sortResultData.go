@@ -1,22 +1,47 @@
 package processingData
 
 import (
-	"sort"
-
 	"Diplom/internal/model"
+	"sort"
+	"sync"
 )
 
 func GetResultData() model.ResultSetT {
-
+	//t := time.Now()
 	var sortResult model.ResultSetT
-	sortResult.SMS = SortSMS()
-	sortResult.MMS = SortMMS()
-	sortResult.VoiceCall = ResultVoiceCall()
-	sortResult.EmailSlice = SortEmail()
-	sortResult.Billing = ResultBilling()
-	sortResult.Support = SortSupport()
-	sortResult.Incidents = SortIncident()
+	var wg sync.WaitGroup
 
+	wg.Add(7)
+	go func() {
+		sortResult.SMS = SortSMS()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.MMS = SortMMS()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.VoiceCall = ResultVoiceCall()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.EmailSlice = SortEmail()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.Billing = ResultBilling()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.Support = SortSupport()
+		wg.Done()
+	}()
+	go func() {
+		sortResult.Incidents = SortIncident()
+		wg.Done()
+	}()
+	wg.Wait()
+	//logrus.Printf("Latency result %d ms \n", time.Since(t).Milliseconds())
 	return sortResult
 }
 

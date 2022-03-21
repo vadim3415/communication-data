@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"net/http"
-
 	"Diplom/internal/model"
 	"Diplom/internal/processingData"
+	"fmt"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +17,7 @@ func statusPage(c *gin.Context) {
 }
 
 func api(c *gin.Context) {
-
+	t := time.Now()
 	var result model.ResultT
 
 	resultSet := processingData.GetResultData()
@@ -37,6 +38,6 @@ func api(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Headers", "Content-Type")
 	c.JSON(http.StatusOK, result)
-
+	fmt.Printf("Latency handler %d ms \n", time.Since(t).Milliseconds())
 	return
 }

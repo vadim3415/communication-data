@@ -12,9 +12,12 @@ type Server struct {
 }
 
 func (s *Server) Run(port string, handler http.Handler) error {
-	port1 := os.Getenv("PORT")
+	httpPort := os.Getenv("PORT")
+	if httpPort == "" {
+		httpPort = "9005"
+	}
 	s.httpServer = &http.Server{
-		Addr:           ":" + port1,
+		Addr:           ":" + httpPort,
 		Handler:        handler,
 		MaxHeaderBytes: 1 << 20, // 1 MB
 		ReadTimeout:    10 * time.Second,

@@ -17,7 +17,7 @@ func (s *Server) Run(port string, handler http.Handler) error {
 		httpPort = "9005"
 	}
 	s.httpServer = &http.Server{
-		Addr:           ":" + httpPort,
+		Addr:           "0.0.0.0:" + httpPort,
 		Handler:        handler,
 		MaxHeaderBytes: 1 << 20, // 1 MB
 		ReadTimeout:    10 * time.Second,

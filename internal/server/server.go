@@ -14,7 +14,7 @@ type Server struct {
 func (s *Server) Run(port string, handler http.Handler) error {
 	httpPort := os.Getenv("PORT")
 	if httpPort == "" {
-		httpPort = "9005"
+		httpPort = "8006"
 	}
 	s.httpServer = &http.Server{
 		Addr:           "0.0.0.0:" + httpPort,

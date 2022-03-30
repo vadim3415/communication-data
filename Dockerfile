@@ -32,7 +32,7 @@ CMD ["sh", "./start.sh"]
 
 ######## docker build --tag diplom .
 ######## docker run --rm -it diplom
-######## docker run --rm -p 9008:9008 -it diplom
+######## docker run --rm -p 8006:8006 -it diplom
 ######## docker run --rm -p 8006:8006 -p 9002:9002 -it diplom
 
 #Ваш точный вывод будет отличаться, но при условии отсутствия ошибок вы должны увидеть FINISHEDстроку в выводе сборки.

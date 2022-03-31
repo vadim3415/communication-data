@@ -10,18 +10,14 @@ import (
 	"Diplom/internal/server"
 
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 )
 
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
-	if err := initConfig(); err != nil {
-		logrus.Fatalf("error initializing configs: %s", err.Error())
-	}
 	srv := new(server.Server)
 	go func() {
-		if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {
+		if err := srv.Run(handler.InitRoutes()); err != nil {
 			logrus.Fatalf(err.Error())
 		}
 	}()
@@ -36,10 +32,4 @@ func main() {
 	if err := srv.Shutdown(context.Background()); err != nil {
 		logrus.Errorf("error occured on server shutting down: %s", err.Error())
 	}
-}
-
-func initConfig() error {
-	viper.AddConfigPath(".")
-	viper.SetConfigName("config")
-	return viper.ReadInConfig()
 }

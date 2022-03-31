@@ -16,7 +16,7 @@ set -m
 # now we bring the primary process back into the foreground
 # and leave it there
 fg %1
-
+############################
 # Start the first process
 #/cmd & # your first application
 #P1=$!

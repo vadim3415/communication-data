@@ -35,7 +35,7 @@ func CheckCountryFunc(country string) string {
 
 func CheckProviderFunc(provider string) string {
 	output := ""
-	mmsProviderMap := map[string]string{
+	ProviderMap := map[string]string{
 		"Topolo":           "Topolo",
 		"Rond":             "Rond",
 		"Kildy":            "Kildy",
@@ -56,7 +56,7 @@ func CheckProviderFunc(provider string) string {
 		"Yandex":           "Yandex",
 		"Mail.ru":          "Mail.ru",
 	}
-	for _, v := range mmsProviderMap {
+	for _, v := range ProviderMap {
 		if provider == v {
 			output = v
 		}
@@ -66,7 +66,7 @@ func CheckProviderFunc(provider string) string {
 
 func FullCountryFunc(country string) string {
 	output := ""
-	mmsCountryMap := map[string]string{
+	CountryMap := map[string]string{
 		"RU": "Russian Federation",
 		"US": "United States of America",
 		"GB": "United Kingdom of Great Britain and Northern Ireland",
@@ -83,7 +83,7 @@ func FullCountryFunc(country string) string {
 		"NZ": "New Zealand",
 		"MC": "Monaco",
 	}
-	for i, v := range mmsCountryMap {
+	for i, v := range CountryMap {
 		if country == i {
 			output = v
 		}
@@ -111,6 +111,7 @@ func convertingBool(s string) bool {
 	b, err := strconv.ParseBool(s)
 	if err != nil {
 		logrus.Println(err)
+		return false
 	}
 	return b
 }

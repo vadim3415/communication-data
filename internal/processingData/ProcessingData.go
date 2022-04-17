@@ -167,6 +167,9 @@ func ResultBilling() model.BillingData {
 		splitLine := strings.Split(line[i], "")
 		lenSplitLine := len(splitLine)
 
+		if len(splitLine) == 0 {
+			return Billing
+		}
 		Billing = model.BillingData{
 			CreateCustomer: convertingBool(splitLine[lenSplitLine-1]),
 			Purchase:       convertingBool(splitLine[lenSplitLine-2]),

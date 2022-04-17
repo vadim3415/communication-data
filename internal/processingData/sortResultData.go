@@ -7,7 +7,6 @@ import (
 )
 
 func GetResultData() model.ResultSetT {
-	//t := time.Now()
 	var sortResult model.ResultSetT
 	var wg sync.WaitGroup
 
@@ -41,12 +40,10 @@ func GetResultData() model.ResultSetT {
 		wg.Done()
 	}()
 	wg.Wait()
-	//logrus.Printf("Latency result %d ms \n", time.Since(t).Milliseconds())
 	return sortResult
 }
 
 func SortSMS() [][]model.SMSData {
-
 	var smsSlice [][]model.SMSData
 	var sortCountry []model.SMSData
 	var sortProvider []model.SMSData
@@ -68,7 +65,6 @@ func SortSMS() [][]model.SMSData {
 }
 
 func SortMMS() [][]model.MMSData {
-
 	var mmsSlice [][]model.MMSData
 	var sortCountry []model.MMSData
 	var sortProvider []model.MMSData
@@ -90,7 +86,6 @@ func SortMMS() [][]model.MMSData {
 }
 
 func SortEmail() [][]model.EmailData {
-
 	var emailSlice [][]model.EmailData
 	var sortFast []model.EmailData
 	var sortLong []model.EmailData
@@ -158,7 +153,6 @@ func SortSupport() []int {
 }
 
 func SortIncident() []model.IncidentData {
-
 	incidentData := GetIncident()
 
 	sort.Slice(incidentData, func(i, j int) bool { return incidentData[i].Status < incidentData[j].Status })

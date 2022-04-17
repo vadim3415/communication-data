@@ -1,5 +1,6 @@
 (function(){
-    let apiPath = 'https://diplom-docker.herokuapp.com/api';
+    let apiPath = 'http://localhost:8006/api';
+    //let apiPath = 'https://diplom-docker.herokuapp.com/api';
     //let apiPath = 'response/error.json';
 
     let dataScheme = {

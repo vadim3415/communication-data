@@ -16,16 +16,13 @@ func statusPage(c *gin.Context) {
 	return
 }
 
-func api(c *gin.Context) {
-	t := time.Now()
-	var result model.ResultT
+var result model.ResultT
 
+func pullData() {
 	resultSet := processingData.GetResultData()
-	billing := resultSet.Billing
 
-	if len(resultSet.SMS[1]) > 0 && len(resultSet.MMS[1]) > 0 && len(resultSet.VoiceCall) > 0 && len(resultSet.EmailSlice) > 0 &&
-		len(resultSet.Support) > 0 && len(resultSet.Incidents) > 0 && (billing.CheckoutPage == true ||
-		billing.CheckoutPage == false) {
+	if len(resultSet.SMS[1]) > 0 && len(resultSet.MMS[1]) > 0 && len(resultSet.VoiceCall) > 0 &&
+		len(resultSet.EmailSlice) > 0 && resultSet.Support[1] > 0 && len(resultSet.Incidents) > 0 {
 
 		result.Data = resultSet
 		result.Status = true
@@ -33,11 +30,32 @@ func api(c *gin.Context) {
 	} else {
 		result.Status = false
 		result.Error = "Error on collect data"
-		result.Data = resultSet
 	}
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Headers", "Content-Type")
-	c.JSON(http.StatusOK, result)
-	fmt.Printf("Latency handler %d ms \n", time.Since(t).Milliseconds())
-	return
+}
+
+var counter int = 0
+var d = time.NewTicker(30 * time.Second)
+
+func api(c *gin.Context) {
+	if counter == 0 {
+		pullData()
+		counter++
+	}
+
+	select {
+	case <-d.C:
+		pullData()
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Headers", "Content-Type")
+		c.JSON(http.StatusOK, result)
+		fmt.Print("update data\n")
+		return
+
+	default:
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Headers", "Content-Type")
+		c.JSON(http.StatusOK, result)
+		fmt.Print("cash data\n")
+		return
+	}
 }
